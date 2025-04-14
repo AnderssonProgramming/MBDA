@@ -1,0 +1,109 @@
+
+-- <========================================================= LAB05 ==========================================================================>
+
+--1. Consulte la información que actualmente está en la tabla
+
+SELECT * FROM mbda.DATA
+
+--¿Cuántos usuarios hay en la tabla DATA? 
+SELECT COUNT(DISTINCT nombres) FROM mbda.DATA;
+
+--¿Cuántas universidades?
+SELECT COUNT(DISTINCT UNOMBRE) FROM mbda.DATA;
+
+--¿Cuáles universidades?
+SELECT DISTINCT(UNOMBRE) FROM mbda.DATA;
+
+
+--2.Inclúyanse como usuarios (personas) 
+
+INSERT INTO mbda.DATA(UCODIGO,UNOMBRE, UDIRECCION, NID, NOMBRES) VALUES (111,'ESCUELA', 'AK 45 (Autonorte) #205-59', 1000096183,'Andersson Sánchez');
+
+INSERT INTO MBDA.DATA (UCODIGO,UNOMBRE,UDIRECCION,NID,NOMBRES) VALUES(111,'ESCUELA','AK 45 (Autonorte) #205-59','1000098857','Cristian Santiago Pedraza');
+
+--¿Ustedes en DATA?
+
+SELECT * FROM MBDA.DATA where NID IN ('1000098857','1000096183');
+
+
+--3.Traten de modificarse o borrarse. ¿qué pasa?
+
+--UPDATE
+
+UPDATE MBDA.DATA
+SET NOMBRES = 'Andersson'
+WHERE NID = '1000096183';
+
+UPDATE MBDA.DATA
+SET NOMBRES = 'Cristian Pedraza'
+WHERE NID = '1000098857';
+
+--DELETE
+
+DELETE FROM MBDA.DATA 
+WHERE NID = '1000098857';
+
+DELETE FROM MBDA.DATA 
+WHERE NID = '1000096183';
+
+
+--4.Escriban la instrucción necesaria para otorgar los permisos que actualmente tiene esa tabla. ¿quién la escribió?}
+
+--5. Escriban las instrucciones necesarias para importar los datos de esa tabla a su base de datos como clientes. Los datos deben ser insertados en las tablas de su base de datos, considerando:
+
+    --El código corresponde a una cadena de caracteres generados aleatoriamente (en mayúsculas)
+    --Todas los usuarios tienen la cédula (‘CC’) como tipo de documento
+    --El programa es ‘Ingeniería’, si es de la Escuela; ‘Derecho’, si es del Rosario; ‘Medicina’, si es Javeriana; y ‘Por definir’, si es de otra universidad.
+    --La fecha de registro es la fecha de hoy
+    --El correo es el primer nombre, seguido de los primeros 7 caracteres del nombre --de la universidad en minúscula, seguido de .edu.co
+    --Ninguno ha sido suspendido
+
+INSERT INTO usuarios (CODIGO, CODIGOUNIVERSIDAD, TID, NID, NOMBRE, PROGRAMA, CORREO, REGISTRO, SUSPENSION, NSUSPENSIONES)
+    SELECT
+        UPPER(codigo_aleatorio) AS CODALEATORIO,
+        NULL AS CODIGOUNIVERSIDAD, -- Aquí debes especificar qué valor deseas para CODIGOUNIVERSIDAD
+        'CC' AS TID,
+        NID,
+        NOMBRES,
+        CASE 
+            WHEN UNOMBRE = 'ESCUELA' THEN 'Ingeniería'
+            WHEN UNOMBRE = 'ROSARIO' THEN 'Derecho'
+            WHEN UNOMBRE = 'JAVERIANA' THEN 'Medicina'
+            ELSE 'Por definir'
+        END AS PROGRAMA,
+        SUBSTR(NOMBRES, 1, INSTR(NOMBRES, ' ') - 1) || LOWER(SUBSTR(UNOMBRE, 1, 7)) || '@mail.edu.co' AS CORREO,
+        SYSDATE AS REGISTRO,
+        NULL AS SUSPENSION,
+        0 AS NSUSPENSIONES
+    FROM (
+        SELECT DBMS_RANDOM.STRING('X', 10) AS codigo_aleatorio, 
+               NID, 
+               NOMBRES, 
+               UNOMBRE
+        FROM MBDA.DATA
+        WHERE LENGTH(NID) <= 10
+        ORDER BY DBMS_RANDOM.RANDOM
+    ) WHERE ROWNUM <= 218; -- Cambia el número 10 por la cantidad de filas que deseas seleccionar
+ 
+SELECT * FROM USUARIOS
+SELECT * FROM MBDA.DATA
+
+
+INSERT INTO universidades (codigo, nombre, direccion, codigoUsuario) VALUES ('111', 'ESCUELA', 'Direcci n H', 'codigoU1');
+
+ALTER TABLE universidades DISABLE CONSTRAINT UK_CODIGO_USUARIOS;
+
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+-- || : operador de concatenacion

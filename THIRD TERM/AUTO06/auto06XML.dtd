@@ -1,0 +1,25 @@
+--IMPLEMENTACIÓN CON TODAS LAS RESTRICCIONES
+
+<!ELEMENT extra_info (productos, propina*, ubicacion, calidad_servicio+, tiempo_entrega+, descuento)>
+<!ELEMENT productos (producto+)>
+<!ELEMENT producto (nombre, cantidad, precio)>
+<!ELEMENT nombre (#PCDATA)>
+<!ELEMENT cantidad (#PCDATA)>
+<!ELEMENT precio (#PCDATA)>
+<!ELEMENT propina (#PCDATA)>
+<!ELEMENT ubicacion (comedor | piscina | habitación | salón)>
+<!ELEMENT comedor (#PCDATA)>
+<!ELEMENT piscina (#PCDATA)>
+<!ELEMENT habitación (#PCDATA)>
+<!ELEMENT salón (#PCDATA)>
+<!ELEMENT calidad_servicio (#PCDATA)>
+<!ELEMENT tiempo_entrega (#PCDATA)>
+<!ELEMENT descuento (#PCDATA)>
+
+<!ATTLIST producto
+    precio CDATA #REQUIRED
+>
+
+<!ATTLIST extra
+    discount CDATA #REQUIRED
+>
