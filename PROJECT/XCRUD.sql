@@ -1,0 +1,13 @@
+DROP PACKAGE consumidores;
+DROP PACKAGE empresas;
+DROP PACKAGE carritosCompras;
+DROP PACKAGE calificaciones;
+DROP PACKAGE menusAleatorios;
+DROP PACKAGE platos;
+DROP PACKAGE envios;
+DROP PACKAGE bonos;
+DROP PACKAGE facturas;
+DROP PACKAGE pedidos;
+DROP PACKAGE domiciliarios;
+DROP PACKAGE donaciones;
+DROP PACKAGE auditorias;

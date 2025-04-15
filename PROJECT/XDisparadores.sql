@@ -1,0 +1,12 @@
+DROP TRIGGER validar_correo_cliente;
+DROP TRIGGER actualizar_estado_platos;
+DROP TRIGGER evitar_eliminar_cliente_referenciado;
+DROP TRIGGER generar_id_donacion;
+DROP TRIGGER verificar_fecha_envio;
+DROP TRIGGER actualizar_total_factura;
+DROP TRIGGER TRG_MENUS_ALEATORIOS_DESCUENTO;
+DROP TRIGGER TRG_PUBLICIDAD_CLIENTES;
+DROP TRIGGER TRG_validar_fecha_expiracion_tipobono_mayor_fecha_actual; 
+DROP TRIGGER actualizar_estado_platos_vendidos_disponible;
+DROP TRIGGER verificar_fecha_envio;
+
